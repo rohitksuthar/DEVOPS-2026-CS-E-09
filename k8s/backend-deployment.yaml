@@ -1,0 +1,24 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insightboard-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: insightboard-backend
+  template:
+    metadata:
+      labels:
+        app: insightboard-backend
+    spec:
+      containers:
+        - name: backend
+          image: insightboard-backend:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 4000
+          envFrom:
+            - secretRef:
+                name: insightboard-backend-env

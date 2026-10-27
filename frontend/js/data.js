@@ -7,7 +7,32 @@
      DATASET: "ib_dataset",
      HISTORY: "ib_history",
      USER: "ib_user",
+     TOKEN: "ib_token",
      THEME: "ib_theme",
+   };
+
+   const API_BASE_URL = (window.IB_API_BASE_URL || "http://localhost:4000/api").replace(/\/$/, "");
+
+   IB.apiFetch = async function (path, options = {}) {
+     const headers = new Headers(options.headers || {});
+     if (!headers.has("Content-Type")) headers.set("Content-Type", "application/json");
+
+     const token = localStorage.getItem(IB.KEYS.TOKEN);
+     if (token && !headers.has("Authorization")) {
+       headers.set("Authorization", "Bearer " + token);
+     }
+
+     const response = await fetch(API_BASE_URL + path, { ...options, headers });
+     const responseText = await response.text();
+     let data = {};
+     if (responseText) {
+       try {
+         data = JSON.parse(responseText);
+       } catch {
+         data = { error: responseText };
+       }
+     }
+     return { ok: response.ok, status: response.status, data };
    };
    
   
