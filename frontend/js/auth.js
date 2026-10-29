@@ -143,7 +143,7 @@ function initSignupForm(form) {
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<span class="spinner"></span> Creating account...';
 
-    IB.apiFetch("/auth/register", {
+    IB.apiFetch("/api/auth/register", {
       method: "POST",
       body: JSON.stringify({ fullName, email, password }),
     }).then(({ ok, data }) => {
