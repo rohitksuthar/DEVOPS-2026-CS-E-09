@@ -11,7 +11,7 @@
      THEME: "ib_theme",
    };
 
-   const API_BASE_URL = (window.IB_API_BASE_URL || "http://localhost:4000/api").replace(/\/$/, "");
+   const API_BASE_URL = "https://insightboard-backend-d6zi.onrender.com";
 
    IB.apiFetch = async function (path, options = {}) {
      const headers = new Headers(options.headers || {});

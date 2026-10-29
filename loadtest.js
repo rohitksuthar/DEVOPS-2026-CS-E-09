@@ -11,7 +11,9 @@ export const options = {
 };
 
 export default function () {
-  const response = http.get('http://localhost:4000/');
+  const response = http.get(
+  'https://insightboard-backend-d6zi.onrender.com/'
+);
 
   check(response, {
     'status is 200': (r) => r.status === 200,
